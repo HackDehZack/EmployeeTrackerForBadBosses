@@ -4,6 +4,9 @@ const Employee = require('../models/Employee');
 
 // Import necessary modules for terminal-based UI
 const mainMenu = require('../views/mainMenu');
+const { displayEmployees } = require('./employeeController');
+
+
 const viewEmployees = require('../views/employeeView');
 const viewRoles = require('../views/roleView');
 const viewDepartments = require('../views/departmentView');
