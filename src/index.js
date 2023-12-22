@@ -2,6 +2,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const Employee = require('../models/Employee'); // Update the file path for the Employee class
+// Import necessary modules for terminal based UI
+const mainMenu = require('../views/mainMenu');
+
+
+
+
 
 // Create an instance of the Express application
 const app = express();
