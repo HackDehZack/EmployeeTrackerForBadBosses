@@ -1,53 +1,85 @@
-const blessed = require('blessed');
-const departmentView = require('./departmentView');
-const roleView = require('./roleView');
-const employeeView = require('./employeeView');
+// Necessary modules (use require statements)
+const inquirer = require('inquirer');
+const Employee = require('../models/employee');
 
-function showMainMenu() {
-  const screen = blessed.screen({
-    smartCSR: true,
-  });
-
-  const mainMenuBox = blessed.box({
-    top: 'center',
-    left: 'center',
-    width: '50%',
-    height: '50%',
-    content: 'EmployeeTrackerForBadBosses\n\n1. View Departments\n2. View Roles\n3. View Employees\n\nPress Q to quit.',
-    tags: true,
-    border: 'line',
-    style: {
-      fg: 'white',
-      bg: 'magenta',
-      border: {
-        fg: 'white',
+// Function to display the main menu options
+function displayMainMenu() {
+  inquirer
+    .prompt([
+      {
+        type: 'list',
+        name: 'menuOption',
+        message: 'What would you like to do?',
+        choices: ['View all employees', 'Add an employee', 'Update an employee role', 'Exit'],
       },
-    },
-  });
-
-  screen.append(mainMenuBox);
-  screen.render();
-
-  screen.key(['q', 'C-c'], () => {
-    screen.destroy();
-    process.exit(0);
-  });
-
-  screen.key(['1', '2', '3'], (ch, key) => {
-    screen.remove(mainMenuBox);
-    screen.render();
-
-    if (key.name === '1') {
-      departmentView();
-    } else if (key.name === '2') {
-      roleView();
-    } else if (key.name === '3') {
-      employeeView();
-    }
-
-    screen.destroy();
-    process.exit(0);
-  });
+    ])
+    .then((answers) => {
+      // Implement the logic for each menu option here
+      switch (answers.menuOption) {
+        case 'View all employees':
+          // Call the method to view all employees
+          viewAllEmployees();
+          break;
+        case 'Add an employee':
+          // Call the method to add an employee
+          addEmployee();
+          break;
+        case 'Update an employee role':
+          // Call the method to update an employee's role
+          updateEmployeeRole();
+          break;
+        case 'Exit':
+          // Exit the application
+          console.log('Goodbye!');
+          process.exit(0);
+          break;
+        default:
+          console.log('Invalid option selected.');
+          break;
+      }
+    });
 }
 
-module.exports = showMainMenu;
+// Function to view all employees
+async function viewAllEmployees() {
+  try {
+    // Create a new instance of the Employee class
+    const employee = new Employee();
+    // Call the getAllEmployees method to retrieve all employees
+    const employees = await employee.getAllEmployees();
+    // Display the employees
+    console.log(employees);
+    // Display the main menu again
+    displayMainMenu();
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
+
+// Function to add an employee
+async function addEmployee() {
+  try {
+    // Implement the logic to add an employee here
+    // Display the main menu again
+    displayMainMenu();
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
+
+// Function to update an employee's role
+async function updateEmployeeRole() {
+  try {
+    // Implement the logic to update an employee's role here
+    // Display the main menu again
+    displayMainMenu();
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
+
+// Call the function to display the main menu
+displayMainMenu();

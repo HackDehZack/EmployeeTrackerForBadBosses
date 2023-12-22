@@ -1,5 +1,4 @@
 const connection = require('../db/connection');
-const employee = require('../models/Employee');
 
 // Function to display all employees
 function displayEmployees() {
