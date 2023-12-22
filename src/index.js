@@ -4,7 +4,14 @@ const bodyParser = require('body-parser');
 const Employee = require('../models/Employee'); // Update the file path for the Employee class
 // Import necessary modules for terminal based UI
 const mainMenu = require('../views/mainMenu');
-
+const viewEmployees = require('../views/employeeView');
+const viewRoles = require('../views/roleView');
+const viewDepartments = require('../views/departmentView');
+const addEmployee = require('../views/employeeAdd');
+const addRole = require('../views/roleAdd');
+const addDepartment = require('../views/departmentAdd');
+const updateEmployeeRole = require('../views/employeeUpdate');
+const updateEmployeeManager = require('../views/employeeUpdate');
 
 
 
