@@ -11,6 +11,7 @@ const addEmployee = require('../views/employeeAdd');
 const addRole = require('../views/roleAdd');
 const addDepartment = require('../views/departmentAdd');
 const employeeUpdate = require('../views/employeeUpdate');
+const readlineSync = require('readline-sync');
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -102,6 +103,8 @@ function displayMainMenu() {
   });
 }
 
+
+
 function handleMainMenuChoice(choice) {
   switch (choice) {
     case '1':
@@ -130,6 +133,18 @@ function handleMainMenuChoice(choice) {
       break;
     case '9':
       rl.close();
+      break;
+    case 'up': // Handle up arrow key
+      // Handle logic for moving up in the menu
+      break;
+    case 'down': // Handle down arrow key
+      // Handle logic for moving down in the menu
+      break;
+    case 'left': // Handle left arrow key
+      // Handle logic for moving left in the menu
+      break;
+    case 'right': // Handle right arrow key
+      // Handle logic for moving right in the menu
       break;
     default:
       console.log('Invalid choice. Please try again.');
