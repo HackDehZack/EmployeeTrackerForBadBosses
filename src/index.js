@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Employee = require('../models/Employee'); // Update the file path for the Employee class
+const Employee = require('../models/Employee'); 
 
 // Import necessary modules for terminal-based UI
 const mainMenu = require('../views/mainMenu');
@@ -10,12 +10,9 @@ const viewDepartments = require('../views/departmentView');
 const addEmployee = require('../views/employeeAdd');
 const addRole = require('../views/roleAdd');
 const addDepartment = require('../views/departmentAdd');
-const updateEmployeeRole = require('../views/employeeUpdate');
+const employeeUpdate = require('../views/employeeUpdate');
 
-// Create an instance of the Express application
 const app = express();
-
-// Set up middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -32,16 +29,64 @@ app.get('/employees', async (req, res) => {
   }
 });
 
-app.post('/employees', async (req, res) => {
-  const { firstName, lastName, roleId, managerId } = req.body;
+app.get('/roles', async (req, res) => {
   try {
-    const result = await employee.addEmployee(firstName, lastName, roleId, managerId);
+    const roles = await employee.getAllRoles();
+    res.json(roles);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while retrieving roles' });
+  }
+});
+
+app.get('/departments', async (req, res) => {
+  try {
+    const departments = await employee.getAllDepartments();
+    res.json(departments);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while retrieving departments' });
+  }
+});
+
+app.post('/employees', async (req, res) => {
+  const { firstName, lastName, roleId } = req.body;
+  try {
+    const result = await employee.addEmployee(firstName, lastName, roleId);
     res.json(result);
   } catch (error) {
     res.status(500).json({ error: 'An error occurred while adding an employee' });
   }
 });
 
+app.post('/roles', async (req, res) => {
+  const { roleName } = req.body;
+  try {
+    const result = await employee.addRole(roleName);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while adding a role' });
+  }
+});
+
+app.post('/departments', async (req, res) => {
+  const { departmentName } = req.body;
+  try {
+    const result = await employee.addDepartment(departmentName);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while adding a department' });
+  }
+});
+
+app.put('/employees/:id/role', async (req, res) => {
+  const { id } = req.params;
+  const { roleId } = req.body;
+  try {
+    const result = await employee.updateEmployeeRole(id, roleId);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ error: 'An error occurred while updating employee role' });
+  }
+});
 // Terminal-based UI
 const readline = require('readline');
 
