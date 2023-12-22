@@ -11,7 +11,6 @@ const addEmployee = require('../views/employeeAdd');
 const addRole = require('../views/roleAdd');
 const addDepartment = require('../views/departmentAdd');
 const updateEmployeeRole = require('../views/employeeUpdate');
-const updateEmployeeManager = require('../views/employeeUpdate');
 
 // Create an instance of the Express application
 const app = express();
