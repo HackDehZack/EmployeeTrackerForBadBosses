@@ -1,8 +1,8 @@
-// Import necessary modules
 const express = require('express');
 const bodyParser = require('body-parser');
 const Employee = require('../models/Employee'); // Update the file path for the Employee class
-// Import necessary modules for terminal based UI
+
+// Import necessary modules for terminal-based UI
 const mainMenu = require('../views/mainMenu');
 const viewEmployees = require('../views/employeeView');
 const viewRoles = require('../views/roleView');
@@ -12,9 +12,6 @@ const addRole = require('../views/roleAdd');
 const addDepartment = require('../views/departmentAdd');
 const updateEmployeeRole = require('../views/employeeUpdate');
 const updateEmployeeManager = require('../views/employeeUpdate');
-
-
-
 
 // Create an instance of the Express application
 const app = express();
@@ -46,10 +43,120 @@ app.post('/employees', async (req, res) => {
   }
 });
 
+// Terminal-based UI
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+function displayMainMenu() {
+  console.log(mainMenu);
+  rl.question('Please enter your choice: ', (choice) => {
+    handleMainMenuChoice(choice);
+  });
+}
+
+function handleMainMenuChoice(choice) {
+  switch (choice) {
+    case '1':
+      displayEmployeeView();
+      break;
+    case '2':
+      displayRoleView();
+      break;
+    case '3':
+      displayDepartmentView();
+      break;
+    case '4':
+      displayAddEmployee();
+      break;
+    case '5':
+      displayAddRole();
+      break;
+    case '6':
+      displayAddDepartment();
+      break;
+    case '7':
+      updateEmployeeRole();
+      break;
+    case '8':
+      updateEmployeeManager();
+      break;
+    case '9':
+      rl.close();
+      break;
+    default:
+      console.log('Invalid choice. Please try again.');
+      displayMainMenu();
+      break;
+  }
+}
+
+function displayEmployeeView() {
+  console.log(viewEmployees);
+  // Retrieve and display employees from the API endpoint '/employees'
+  // You can make an HTTP request to the endpoint using a library like 'axios'
+  // Handle the response and display the employees
+}
+
+function displayRoleView() {
+  console.log(viewRoles);
+  // Retrieve and display roles from the API endpoint '/roles'
+  // Handle the response and display the roles
+}
+
+function displayDepartmentView() {
+  console.log(viewDepartments);
+  // Retrieve and display departments from the API endpoint '/departments'
+  // Handle the response and display the departments
+}
+
+function displayAddEmployee() {
+  console.log(addEmployee);
+  // Prompt the user for employee details
+  // Make a POST request to the API endpoint '/employees' to add the employee
+  // Handle the response and display the result
+}
+
+function displayAddRole() {
+  console.log(addRole);
+  // Prompt the user for role details
+  // Make a POST request to the API endpoint '/roles' to add the role
+  // Handle the response and display the result
+}
+
+function displayAddDepartment() {
+  console.log(addDepartment);
+  // Prompt the user for department details
+  // Make a POST request to the API endpoint '/departments' to add the department
+  // Handle the response and display the result
+}
+
+function updateEmployeeRole() {
+  console.log(updateEmployeeRole);
+  // Prompt the user for employee ID and new role ID
+  // Make a PUT request to the API endpoint '/employees/:id/role' to update the employee role
+  // Handle the response and display the result
+}
+
+function updateEmployeeManager() {
+  console.log(updateEmployeeManager);
+  // Prompt the user for employee ID and new manager ID
+  // Make a PUT request to the API endpoint '/employees/:id/role' to update the employee manager
+  // Handle the response and display the result
+}
+
 // Start the server
 app.listen(3000, () => {
   console.log('Server started on port 3000');
+  displayMainMenu();
 });
 
 // The last line of code above starts the Express server on port 3000.
 // This port number (3000) is specific to the Express server and is unrelated to the MySQL port (3306) used for the database connection.
+
+// The displayMainMenu() function is called after the server starts to initiate the terminal-based UI.
+// It displays the main menu and prompts the user for their choice.
+// The handleMainMenuChoice() function handles the user's choice and calls the appropriate functions based on the choice.
