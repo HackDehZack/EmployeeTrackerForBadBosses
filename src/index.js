@@ -1,7 +1,7 @@
 // Import necessary modules
 const express = require('express');
 const bodyParser = require('body-parser');
-const Employee = require('../lib/Employee'); // Update the file path for the Employee class
+const Employee = require('../models/Employee'); // Update the file path for the Employee class
 
 // Create an instance of the Express application
 const app = express();
