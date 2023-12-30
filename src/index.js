@@ -232,21 +232,21 @@ function displayAddDepartment() {
   });
 }
 
-function updateEmployeeRole() {
-  console.log(updateEmployeeRole);
-  rl.question('Enter the employee ID: ', (employeeId) => {
-    rl.question('Enter the new role ID: ', (roleId) => {
-      employee.updateEmployeeRole(employeeId, roleId)
-        .then((result) => {
-          console.log(result);
-          displayMainMenu();
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          displayMainMenu();
-        });
-    });
-  });
-}
+// function updateEmployeeRole() {
+//   console.log(updateEmployeeRole);
+//   rl.question('Enter the employee ID: ', (employeeId) => {
+//     rl.question('Enter the new role ID: ', (roleId) => {
+//       employee.updateEmployeeRole(employeeId, roleId)
+//         .then((result) => {
+//           console.log(result);
+//           displayMainMenu();
+//         })
+//         .catch((error) => {
+//           console.error('Error:', error);
+//           displayMainMenu();
+//         });
+//     });
+//   });
+// }
 
 displayMainMenu();
